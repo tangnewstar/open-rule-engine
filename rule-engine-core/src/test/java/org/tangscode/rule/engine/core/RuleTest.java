@@ -54,7 +54,9 @@ public class RuleTest {
                 .id("price_tier")
                 .when(Conditions.field("amount", ComparisonOperator.GT, 100))
                 .then("A")
-                .when(Conditions.field("amount", ComparisonOperator.GT, 50))
+                .when(Conditions.or(
+                        Conditions.field("Level", ComparisonOperator.EQ, "VIP"),
+                        Conditions.field("amount", ComparisonOperator.GT, 50)))
                 .then("B")
                 .defaultValue("C")
                 .build();
@@ -63,6 +65,7 @@ public class RuleTest {
         context.putParam("amount", 101);
         System.out.println("amount: " + context.getParam("amount") + " price_tier:" + valueRule.evaluate(context));
         context.putParam("amount", 100);
+        context.putParam("Level", "Normal");
         System.out.println("amount: " + context.getParam("amount") + " price_tier:" + valueRule.evaluate(context));
         context.putParam("amount", 50);
         System.out.println("amount: " + context.getParam("amount") + " price_tier:" + valueRule.evaluate(context));
