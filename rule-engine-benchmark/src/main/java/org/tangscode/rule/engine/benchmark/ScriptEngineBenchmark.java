@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class ScriptEngineBenchmark {
 
     @Benchmark
-    public void testScriptDynamicParam(EngineBenchmarkConfig config) {
+    public void testScriptDynamicParam(ScriptEngineBenchmarkConfig config) {
         String script = generateRuleScript(config.language);
         for (int i=0; i<config.loopSize; i++) {
             HashMap context = new HashMap();

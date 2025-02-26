@@ -11,7 +11,7 @@ import org.tangscode.rule.engine.script.wrapper.ScriptEngineWrapper;
  * @date 2025/2/25
  */
 @State(Scope.Benchmark)
-public class EngineBenchmarkConfig {
+public class ScriptEngineBenchmarkConfig {
 
     // 参数化测试维度
     @Param({"groovy","jexl","javascript"})

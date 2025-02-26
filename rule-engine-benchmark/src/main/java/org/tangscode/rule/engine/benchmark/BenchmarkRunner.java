@@ -15,7 +15,8 @@ public class BenchmarkRunner {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
 //                .include(ScriptEngineBenchmark.class.getSimpleName())
-                .include(ScriptEngineFixedParamBenchmark.class.getSimpleName())
+//                .include(ScriptEngineFixedParamBenchmark.class.getSimpleName())
+                .include(RuleEngineBenchmark.class.getSimpleName())
                 .forks(1) // 使用独立JVM进程
                 .build();
 

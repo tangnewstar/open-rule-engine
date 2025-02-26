@@ -156,3 +156,10 @@
 - **选择合适的脚本引擎：** 基于上述分析，JEXL 是性能最优的选择，特别是在需要处理大规模数据或频繁调用脚本的情况下。如果对性能要求不高，或者项目中有特定的依赖关系，可以选择 Groovy 或 JavaScript。
 
 - **调整循环次数：** 如果你的应用场景允许，尽量减少不必要的大循环次数，以减轻性能负担。
+
+### 规则引擎
+#### ValueRule动态传参
+| Benchmark                          | (loopSize) | Mode | Cnt | Score       | Error       | Units |
+|------------------------------------|------------|------|-----|-------------|-------------|-------|
+| RuleEngineBenchmark.testValueRule  | 100        | thrpt| 5   | 233212.153  | ± 98588.945 | ops/s |
+| RuleEngineBenchmark.testValueRule  | 1000       | thrpt| 5   | 23936.416   | ± 13702.102 | ops/s |

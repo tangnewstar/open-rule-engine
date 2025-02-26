@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import org.openjdk.jmh.annotations.*;
 
 import java.util.HashMap;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class ScriptEngineFixedParamBenchmark {
 
     @Benchmark
-    public void testScriptFixedParam(EngineBenchmarkConfig config) {
+    public void testScriptFixedParam(ScriptEngineBenchmarkConfig config) {
         String script = generateRuleScript(config.language);
         for (int i=0; i<config.loopSize; i++) {
             HashMap context = new HashMap();
