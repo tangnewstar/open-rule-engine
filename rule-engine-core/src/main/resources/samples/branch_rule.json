@@ -1,0 +1,43 @@
+{
+  "id": "price_tier",
+  "branches": [
+    {
+      "condition": {
+        "type": "FIELD",
+        "field": "amount",
+        "operator": "GT",
+        "threshold": 100
+      },
+      "expression": {
+        "type": "CONSTANT",
+        "value": "A"
+      }
+    },
+    {
+      "condition": {
+        "type": "LOGICAL",
+        "operator": "OR",
+        "conditions": [
+          {
+            "type": "FIELD",
+            "field": "Level",
+            "operator": "EQ",
+            "threshold": "VIP"
+          },
+          {
+            "type": "FIELD",
+            "field": "amount",
+            "operator": "GT",
+            "threshold": 50
+          }
+        ]
+      },
+      "expression": {
+        "type": "SCRIPT",
+        "language": "groovy",
+        "script": "'B_' + $ctx.getParam('Level')"
+      }
+    }
+  ],
+  "defaultValue": "C"
+}

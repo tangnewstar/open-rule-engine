@@ -1,0 +1,20 @@
+{
+  "type": "LOGICAL",
+  "operator": "AND",
+  "conditions": [
+    {
+      "type": "FIELD",
+      "field": "income",
+      "operator": "GT",
+      "threshold": 50000
+    },
+    {
+      "type": "LOGICAL",
+      "operator": "OR",
+      "conditions": [
+        {"type": "FIELD", "field": "vipLevel", "operator": "GTE", "threshold": 3},
+        {"type": "FIELD", "field": "creditScore", "operator": "GTE", "threshold": 700}
+      ]
+    }
+  ]
+}
