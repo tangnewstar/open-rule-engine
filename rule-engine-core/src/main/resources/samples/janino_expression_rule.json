@@ -1,0 +1,8 @@
+{
+  "id": "expression_2",
+  "type": "EXPRESSION",
+  "expression": {
+    "type": "JANINO",
+    "expression": "((Integer) params.get(\"age\")) > 18 ? \"adult\" : \"child\""
+  }
+}

@@ -13,7 +13,9 @@ import org.tangscode.rule.engine.core.RuleContext;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ConstantExpression.class, name = "CONSTANT"),
-        @JsonSubTypes.Type(value = ScriptExpression.class, name = "SCRIPT")
+        @JsonSubTypes.Type(value = ScriptExpression.class, name = "SCRIPT"),
+        @JsonSubTypes.Type(value = JaninoExpression.class, name = "JANINO"),
+        @JsonSubTypes.Type(value = JaninoScriptExpression.class, name = "JANINO-SCRIPT")
 })
 public interface Expression {
     // 计算

@@ -11,17 +11,21 @@ import java.util.*;
 /**
  * @author tangxinxing
  * @version 1.0
- * @description
+ * @description 分支规则 <br />
+ * 逻辑描述：<p>
+ *     if (conditionA) { return 'A'}
+ * </p>
+ *      elseif (conditionB) { return 'B'}
+ *      else { return 'C' }
  * @date 2025/2/21
  */
-// 返回值的规则定义（支持序列化）
-public class ValueRule<T> implements SerializableRule {
+public class BranchRule<T> implements SerializableRule {
 
     private final String id;
-    private final List<RuleBranch<T>> branches;
+    private final List<RuleBranch> branches;
     private final T defaultValue;
 
-    private ValueRule(String id, List<RuleBranch<T>> branches, T defaultValue) {
+    private BranchRule(String id, List<RuleBranch> branches, T defaultValue) {
         this.id = Objects.requireNonNull(id, "Rule ID cannot be null");
         if (branches == null || branches.isEmpty()) {
             throw new IllegalArgumentException("Rule branches cannot be null");
@@ -32,12 +36,12 @@ public class ValueRule<T> implements SerializableRule {
 
     // 修改构造方法参数接收逻辑 ▼
     @JsonCreator
-    public static <T> ValueRule<T> create(
+    public static <T> BranchRule<T> create(
             @JsonProperty("id") String id,
-            @JsonProperty(value = "branches", required = false) List<RuleBranch<T>> branches,
+            @JsonProperty(value = "branches", required = true) List<RuleBranch> branches,
             @JsonProperty(value = "defaultValue", required = false) T defaultValue
     ) {
-        return new ValueRule<>(id, branches, defaultValue);
+        return new BranchRule<>(id, branches, defaultValue);
     }
 
     @Override
@@ -52,6 +56,9 @@ public class ValueRule<T> implements SerializableRule {
 
     @Override
     public Object evaluate(RuleContext context) {
+        if (context == null) {
+            throw new IllegalArgumentException("RuleContext is null while evaluating result");
+        }
         // 遍历分支进行规则计算
         for (RuleBranch branch: branches) {
             if (branch.condition.evaluate(context)) {
@@ -75,10 +82,10 @@ public class ValueRule<T> implements SerializableRule {
         return paramSet;
     }
 
-    // Builder class for constructing ValueRule instances
+    // Builder class for constructing BranchRule instances
     public static class Builder<T> {
         private String id;
-        private List<RuleBranch<T>> branches = new ArrayList<>();
+        private List<RuleBranch> branches = new ArrayList<>();
         private T defaultValue;
 
         public Builder<T> id(String id) {
@@ -96,13 +103,13 @@ public class ValueRule<T> implements SerializableRule {
             return new BranchBuilder(this, condition);
         }
 
-        public ValueRule<T> build() {
-            return new ValueRule<>(id, branches, defaultValue);
+        public BranchRule<T> build() {
+            return new BranchRule<>(id, branches, defaultValue);
         }
     }
 
     // 独立分支定义（支持嵌套复杂条件）
-    public static class RuleBranch<T> {
+    public static class RuleBranch {
 
         @JsonProperty("condition")
         private final Condition condition;
@@ -135,7 +142,7 @@ public class ValueRule<T> implements SerializableRule {
         }
 
         public Builder then(Expression expression) {
-            parentBuilder.branches.add(new RuleBranch<>( condition, expression));
+            parentBuilder.branches.add(new RuleBranch( condition, expression));
             return parentBuilder;
         }
     }

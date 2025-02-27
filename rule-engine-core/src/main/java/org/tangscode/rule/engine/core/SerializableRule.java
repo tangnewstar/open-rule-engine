@@ -13,9 +13,10 @@ import java.util.Set;
  * @date 2025/2/21
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY,
-        property = "type", defaultImpl = ValueRule.class)
+        property = "type", defaultImpl = BranchRule.class)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = ValueRule.class, name = "VALUE")
+        @JsonSubTypes.Type(value = BranchRule.class, name = "BRANCH"),
+        @JsonSubTypes.Type(value = ExpressionRule.class, name = "EXPRESSION")
 })
 public interface SerializableRule extends Rule, Serializable {
     Set<String> analyzeInvolvingParams();

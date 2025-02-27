@@ -1,13 +1,11 @@
 package org.tangscode.rule.engine.benchmark;
 
-import com.google.common.collect.ImmutableMap;
 import org.openjdk.jmh.annotations.*;
+import org.tangscode.rule.engine.core.BranchRule;
 import org.tangscode.rule.engine.core.RuleContext;
-import org.tangscode.rule.engine.core.ValueRule;
 import org.tangscode.rule.engine.core.condition.Conditions;
 import org.tangscode.rule.engine.core.enums.ComparisonOperator;
 
-import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +24,7 @@ public class RuleEngineBenchmark {
     @Benchmark
     public void testValueRule(RuleEngineBenchmarkConfig config) {
 
-        ValueRule valueRule = ValueRule.builder()
+        BranchRule branchRule = BranchRule.builder()
                 .id("price_tier")
                 .when(Conditions.field("amount", ComparisonOperator.GT, 100))
                 .then("A")
@@ -42,8 +40,8 @@ public class RuleEngineBenchmark {
             int random = ThreadLocalRandom.current().nextInt(1,201);
             context.putParam("amount", 101);
             context.putParam("Level", random > 100 ? "Normal" : "VIP");
-            valueRule.evaluate(context);
-//            System.out.println("amount: " + context.getParam("amount") + " price_tier:" + valueRule.evaluate(context));
+            branchRule.evaluate(context);
+//            System.out.println("amount: " + context.getParam("amount") + " price_tier:" + branchRule.evaluate(context));
         }
     }
 }

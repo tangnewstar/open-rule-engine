@@ -37,7 +37,15 @@
         "language": "groovy",
         "script": "'B_' + $ctx.getParam('Level')"
       }
+    },
+    {
+      "condition": {
+        "type": "TRUE"
+      },
+      "expression": {
+        "type": "CONSTANT",
+        "value": "C"
+      }
     }
-  ],
-  "defaultValue": "C"
+  ]
 }

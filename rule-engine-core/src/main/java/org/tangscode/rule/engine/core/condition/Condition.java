@@ -15,7 +15,8 @@ import java.util.Collection;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = LogicalCondition.class, name = "LOGICAL"),
-        @JsonSubTypes.Type(value = FieldCondition.class, name = "FIELD")
+        @JsonSubTypes.Type(value = FieldCondition.class, name = "FIELD"),
+        @JsonSubTypes.Type(value = TrueCondition.class, name = "TRUE")
 })
 public interface Condition {
     boolean evaluate(RuleContext ruleContext);

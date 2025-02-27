@@ -1,0 +1,8 @@
+{
+  "id": "expression_1",
+  "type": "EXPRESSION",
+  "expression": {
+    "type": "CONSTANT",
+    "value": 100
+  }
+}
