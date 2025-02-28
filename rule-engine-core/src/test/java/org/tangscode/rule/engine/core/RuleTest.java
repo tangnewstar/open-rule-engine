@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tangscode.rule.engine.core.condition.Conditions;
 import org.tangscode.rule.engine.core.enums.ComparisonOperator;
+import org.tangscode.rule.engine.core.expression.JaninoExpression;
 import org.tangscode.rule.engine.core.utils.ResourceUtil;
 
 import java.io.IOException;
@@ -26,7 +27,8 @@ public class RuleTest {
 //        ruleTest.testBranchRuleFluentAPI();
 //        ruleTest.testMultiBranchRule();
 //        ruleTest.testExpressionRule();
-        ruleTest.testJaninoExpressionRule();
+//        ruleTest.testJaninoExpressionRule();
+        ruleTest.testJaninoExpressionRuleAPI();
     }
 
     public void testBranchRuleFluentAPI() {
@@ -118,5 +120,14 @@ public class RuleTest {
         RuleContext context = new RuleContext();
         context.putParam("age", 20);
         System.out.println(rule.evaluate(context));
+    }
+
+    void testJaninoExpressionRuleAPI() {
+        ExpressionRule expressionRule = ExpressionRule.create("price_tier", new JaninoExpression("(Integer)params.get(\"amount\") > 100 ? \"A\" : ((Integer)params.get(\"amount\") > 50 || params.get(\"Level\") == \"VIP\" ? \"B\" : \"C\")"));
+        RuleContext ruleContext = new RuleContext();
+        ruleContext.putParam("amount", 50);
+        ruleContext.putParam("Level", "VIP");
+        Object result = expressionRule.evaluate(ruleContext);
+        System.out.println("expr: " + expressionRule + " result: " + result);
     }
 }

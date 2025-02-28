@@ -43,7 +43,7 @@ public class ExpressionTest {
 
     void testJaninoScriptExpression() {
         // 创建规则
-        Expression expr = new JaninoScriptExpression("return ((Integer) param.get(\"age\")) > 18 ? \"adult\" : \"child\";");
+        Expression expr = new JaninoScriptExpression("return ((Integer) params.get(\"age\")) > 18 ? \"adult\" : \"child\";");
 
 //// 或更安全的写法（处理可能的null值）：
 //        (params.age != null ? (Integer) params.age : 0) > 18 ? "adult" : "child"

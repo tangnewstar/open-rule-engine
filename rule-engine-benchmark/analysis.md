@@ -158,8 +158,20 @@
 - **调整循环次数：** 如果你的应用场景允许，尽量减少不必要的大循环次数，以减轻性能负担。
 
 ### 规则引擎
-#### ValueRule动态传参
+#### BranchRule动态传参
 | Benchmark                          | (loopSize) | Mode | Cnt | Score       | Error       | Units |
 |------------------------------------|------------|------|-----|-------------|-------------|-------|
-| RuleEngineBenchmark.testValueRule  | 100        | thrpt| 5   | 233212.153  | ± 98588.945 | ops/s |
+| RuleEngineBenchmark.testBranchRule | 100        | thrpt| 5   | 233212.153  | ± 98588.945 | ops/s |
 | RuleEngineBenchmark.testValueRule  | 1000       | thrpt| 5   | 23936.416   | ± 13702.102 | ops/s |
+
+#### JaninoExpression - 动态参数
+| Benchmark                                     | (loopSize) | Mode  | Cnt | Score     | Error     | Units |
+|-----------------------------------------------|------------|-------|-----|-----------|-----------|-------|
+| RuleEngineBenchmark.testJaninoExpressionRule  | 100        | thrpt | 5   | 1033.795  | ± 355.211 | ops/s |
+| RuleEngineBenchmark.testJaninoExpressionRule  | 1000       | thrpt | 5   | 757.798   | ± 257.289 | ops/s |
+
+#### JaninoScriptExpression - 动态参数
+| Benchmark                                     | (loopSize) | Mode  | Cnt | Score     | Error     | Units |
+|-----------------------------------------------|------------|-------|-----|-----------|-----------|-------|
+| RuleEngineBenchmark.testJaninoScriptExpression| 100        | thrpt | 5   | 614.752   | ± 298.246 | ops/s |
+| RuleEngineBenchmark.testJaninoScriptExpression| 1000       | thrpt | 5   | 490.242   | ± 360.763 | ops/s |

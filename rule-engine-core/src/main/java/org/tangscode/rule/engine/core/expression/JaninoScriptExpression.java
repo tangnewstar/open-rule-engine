@@ -52,7 +52,7 @@ public class JaninoScriptExpression implements Expression {
             ScriptEvaluator se = new ScriptEvaluator(
                     this.expression,                      // 脚本代码
                     Object.class,                // 返回值类型
-                    new String[]{"param"},         // 参数名列表
+                    new String[]{"params"},         // 参数名列表
                     new Class<?>[]{Map.class}    // 参数类型列表
             );
             se.cook(expression);
